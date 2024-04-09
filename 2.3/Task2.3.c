@@ -1,13 +1,15 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include <conio.h>
 #include <math.h>
 #include <stdbool.h>
 #include <ctype.h>
 #define INCORRENT_INPUT "Неверный ввод!\n"
 #define NUMBER_SIZE 40
+#define INPUT_CHAR_SIZE 3
+
 
 float operationAddition(float a, float b)
 {
@@ -88,7 +90,7 @@ void input(float* num1, float* num2)
 	inputNumber(num2);
 }
 
-float (*select(char choice)) (float, float)
+float (*selectt(int choice)) (float, float)
 {
 	switch (choice)
 	{
@@ -104,26 +106,29 @@ int main(void)
 {
 	setlocale(0, "ru");
 	char selectField;
+	char selectString[INPUT_CHAR_SIZE];
 	do
 	{
 		printf("Выбор операции\n1. +\n2. -\n3. *\n4. /\n5. ^\n0. Выход\n");
-		selectField = _getch();
+		fgets(selectString, INPUT_CHAR_SIZE, stdin);
+		__fpurge(stdin);
+		selectField = selectString[0];
 		float num1;
 		float num2;
 		float (*operation)(float, float);
 		if (selectField >= '1' && selectField <= '5')
 		{
 			input(&num1, &num2);
-			if (selectField == '1')
-				operation = select(1);
-			else if (selectField == '2')
-				operation = select(2);
+			if (selectField == '2')
+				operation = selectt(2);
 			else if (selectField == '3')
-				operation = select(3);
+				operation = selectt(3);
 			else if (selectField == '4')
-				operation = select(4);
+				operation = selectt(5);
 			else if (selectField == '5')
-				operation = select(5);
+				operation = selectt(5);
+			else
+				operation = selectt(1);
 			printf("Результат: %g\n", operation(num1, num2));
 		}
 		else if (selectField == '0')

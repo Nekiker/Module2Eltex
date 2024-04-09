@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#include <conio.h>
 #include <math.h>
 #include <stdbool.h>
 #include <ctype.h>
 #define INCORRENT_INPUT "Неверный ввод!\n"
 #define NUMBER_SIZE 40
+#define INPUT_CHAR_SIZE 3
 
 float operationAddition(float a, float b)
 {
@@ -91,11 +91,14 @@ void input(float* num1, float* num2)
 int main(void)
 {
 	setlocale(0, "ru");
+	char select[INPUT_CHAR_SIZE];
 	char selectField;
 	do
 	{
 		printf("Выбор операции\n1. +\n2. -\n3. *\n4. /\n5. ^\n0. Выход\n");
-		selectField = _getch();
+		fgets(select, INPUT_CHAR_SIZE, stdin);
+		__fpurge(stdin);
+		selectField = select[0];
 		float num1;
 		float num2;
 		if (selectField >= '1' && selectField <= '5')
