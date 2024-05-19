@@ -1,0 +1,2 @@
+all:
+	gcc Task4_1.c Task4_1_functions.c Task4_1_list.c -o Task4_1
